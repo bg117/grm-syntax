@@ -31,7 +31,7 @@ or
 ```
 CONSTANT-TOKEN : <regex-here>
 ```
-Use capital letters and **-** (hyphen) for naming a constant token. You need to surround the token with quotes **except when using RegEx**. You also must escape the special RegEx characters. You can also use RegEx in defining a constant token. Learn more about RegEx [below](#regex-anchor).
+Use capital letters and **-** (hyphen) for naming a constant token. You need to surround the token with quotes **except when using RegEx**. You also must escape the special RegEx characters. You can also use RegEx in defining a constant token. Learn more about RegEx [below](#regular-expressions).
 
 Lastly, you can provide alternate rules using the pipe (**|**) symbol.
 
@@ -46,7 +46,7 @@ int-or-float : DIGIT+
 ```
 <sup>Yes, I know it can still be simplified.</sup>
 
-### <a href="regex-anchor"></a>Regular expressions
+### Regular expressions
 
 You can use RegEx syntax such as `*`, `+`, character classes, capture groups, and more.
 
