@@ -1,0 +1,42 @@
+{
+    "name": "grm-syntax",
+    "publisher": "the-opencode-team",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bg117/grm-syntax.git"
+    },
+    "displayName": "Grammar Syntax",
+    "description": "Syntax highlighting support for .grm files",
+    "version": "1.0.0",
+    "engines": {
+        "vscode": "^1.63.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "grm",
+                "aliases": [
+                    "grammar",
+                    "grm"
+                ],
+                "extensions": [
+                    ".grm"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "grm",
+                "scopeName": "source.grammar",
+                "path": "./syntaxes/.grm.tmLanguage.json"
+            }
+        ]
+    },
+    "dependencies": {
+        "vsce": "^2.6.4"
+    }
+}

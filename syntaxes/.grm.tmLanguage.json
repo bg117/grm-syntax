@@ -1,0 +1,130 @@
+{
+  "fileTypes": [
+    "grm"
+  ],
+  "name": "grammar",
+  "patterns": [
+    {
+      "include": "#main"
+    }
+  ],
+  "scopeName": "source.grammar",
+  "repository": {
+    "main": {
+      "patterns": [
+        {
+          "match": "(\\|)",
+          "name": "punctuation.separator.grammar"
+        },
+        {
+          "include":"#main_pattern"
+        }
+      ]
+    },
+    "main_pattern": {
+      "patterns": [
+        {
+          "begin": "(\\[)",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.type.grammar"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#char_class_pattern"
+            }
+          ],
+          "end": "(\\])",
+          "endCaptures": {
+            "1": {
+              "name": "entity.name.type.grammar"
+            }
+          }
+        },
+        {
+          "begin": "(\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "meta.regex.capture-group.grammar"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#capture_group_pattern"
+            }
+          ],
+          "end": "(\\))",
+          "endCaptures": {
+            "1": {
+              "name": "meta.regex.capture-group.grammar"
+            }
+          }
+        },
+        {
+          "match": "([A-Z][A-Z0-9\\-]*)",
+          "name": "keyword.constants.metachar.grammar"
+        },
+        {
+          "match": "([a-z][a-z0-9\\-]*)",
+          "name": "variable.grammar"
+        },
+        {
+          "match": "(\\\\[.*+\\[\\]?|()\\\\\\\"ASsUuWwDdBbrntfvELlQZ$^:])",
+          "name": "constant.character.escape.grammar"
+        },
+        {
+          "match": "([+?*.\\[\\]\\\\()$^])",
+          "name": "keyword.control.regex.grammar"
+        },
+        {
+          "match": "(:)",
+          "name": "keyword.operator.assignment.grammar"
+        },
+        {
+          "match": "(\")",
+          "name": "string.grammar"
+        },
+        {
+          "match": "(#.*)",
+          "name": "comment.grammar"
+        },
+        {
+          "match": "([^\\s])",
+          "name": "string.unquoted.grammar"
+        }
+      ]
+    },
+    "char_class_pattern": {
+      "patterns": [
+        {
+          "match": "(\\\\[\\^\\]\\\\\\-ASsUuWwDdBbrntfvELlQZ])",
+          "name": "constant.character.escape.grammar"
+        },
+        {
+          "match": "(\\]|\\\\|^|-)",
+          "name": "keyword.operator.logical.grammar"
+        },
+        {
+          "match": "(.)",
+          "name": "string.grammar"
+        }
+      ]
+    },
+    "capture_group_pattern": {
+      "patterns": [
+        {
+          "match": "(\\||\\?\\:)",
+          "name": "keyword.control.grammar"
+        },
+        {
+          "include": "#main_pattern"
+        },
+        {
+          "match": "([^\\s])",
+          "name": "string.unquoted.grammar"
+        }
+      ]
+    }
+  }
+}
