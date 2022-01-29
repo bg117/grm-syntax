@@ -5,8 +5,8 @@ This extension adds syntax highlighting for `.grm` files.
 ## Features
 
 + Comments
-+ Variable tokens
-+ Constant tokens
++ Terminals
++ Non-terminals
 + Simple RegEx highlighting
 
 ### Preview
@@ -17,25 +17,25 @@ This extension adds syntax highlighting for `.grm` files.
 
 ### Basic syntax
 
-You can define a rule using this syntax:
+You can define a non-terminal rule using this syntax:
 ```
 rule-name : <rule content>
 ```
-You should only use lowercase letters and **-** (hyphen) in naming a rule.
+You should only use lowercase letters and **-** (hyphen) in naming a non-terminal rule.
 
-To define a constant token, use this syntax:
+To define a terminal, use this syntax:
 ```
-CONSTANT-TOKEN : "<token>"
+TERMINAL-TOKEN : "<token>"
 ```
 or
 ```
-CONSTANT-TOKEN : <regex-here>
+TERMINAL-TOKEN : <regex-here>
 ```
-Use capital letters and **-** (hyphen) for naming a constant token. You need to surround the token with quotes **except when using RegEx**. You also must escape the special RegEx characters. You can also use RegEx in defining a constant token. Learn more about RegEx [below](#regular-expressions).
+Use capital letters and **-** (hyphen) for naming a terminal. You need to surround the token with quotes **except when using RegEx**. You also must escape the special RegEx characters. You can also use RegEx in defining a constant token. Learn more about RegEx [below](#regular-expressions).
 
 Lastly, you can provide alternate rules using the pipe (**|**) symbol.
 
-Here is a rule that matches a integer OR a floating-point number:
+Here is a terminal that matches a integer OR a floating-point number:
 
 ```
 DIGIT : \d
@@ -50,7 +50,7 @@ int-or-float : DIGIT+
 
 You can use RegEx syntax such as `*`, `+`, character classes, capture groups, and more.
 
-For example, to define a constant token that matches any length of letters (including underscore) or numbers:
+For example, to define a terminal that matches any length of letters (including underscore) or numbers:
 
 ```
 LETTERS-OR-NUMBERS : [\w\s]+

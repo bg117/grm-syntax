@@ -1,0 +1,69 @@
+# Sample grammar
+
+LCURL-BRACE : "{"
+RCURL-BRACE : "}"
+
+LPAREN : "\("
+RPAREN : "\)"
+
+WORD-CHAR : \w
+
+DIGIT : \d
+
+FUNC-KW : "func"
+
+COMMA : ","
+
+COLON : "\:"
+SEMICOLON : ";"
+
+EQ : "="
+
+PLUS : "\+"
+MINUS : "-"
+MUL : "\*"
+DIV : "/"
+
+DOT : "\."
+
+all : program-stmt*
+	# will match "func main() { hi:decimal = 1.0; } main()"
+
+program-stmt : func-decl
+			 | stmt
+
+param-list : (var-decl (COMMA var-decl)* )?
+
+var-decl : ident COLON ident
+
+func-decl : FUNC-KW ident LPAREN param-list RPAREN LCURL-BRACE stmt-list RCURL-BRACE
+		  # will match "func foo(x:int, y:int) { x:string = y; }"
+
+stmt-list : (stmt)*
+
+func-call : ident LPAREN param-list RPAREN
+		  # will match "foo(1, 2)"
+
+stmt : asmt-expr SEMICOLON
+	 # will match "foo = 1 + 2;"
+	 | func-call SEMICOLON
+	 # will match "foo(1, 2);"
+
+expr : asmt-expr
+
+asmt-expr : term-expr (EQ term-expr)*
+
+term-expr : factor-expr ((PLUS | MINUS) factor-expr)*
+		  # will match "1 + 2" and "1 - 2 + 3"
+factor-expr : negate-expr ((MUL | DIV) negate-expr)*
+			# will match "1 * 2" and "1 / 2 * 3"
+negate-expr : (MINUS)? prim-expr
+			# will match "1" and "-1"
+prim-expr : number
+		  | LPAREN expr RPAREN
+
+number : DIGIT+ (DOT DIGIT+)?
+	   # will match "1" and "1.0"
+
+ident : [a-zA-Z_] WORD-CHAR*
+	  # will match "foo" and "foo_bar"
